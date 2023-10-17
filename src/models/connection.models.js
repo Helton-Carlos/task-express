@@ -8,4 +8,9 @@ const connection = mysql.createPool({
   database: process.env.MYSQL_DATABASE,
 });
 
+connection.connect((error) => {
+  if (error) throw error;
+  console.log(`Conectado ao BD: ${process.env.MYSQL_DATABASE}`);
+});
+
 module.exports = connection;
