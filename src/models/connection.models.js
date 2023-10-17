@@ -1,16 +1,10 @@
-const mysql = require('mysql2');
-require('dotenv').config();
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
-const connection = mysql.createPool({
-  host: process.env.MYSQL_HOST,
-  user: process.env.MYSQL_USER,
-  password: process.env.MYSQL_PASSWORD,
-  database: process.env.MYSQL_DATABASE,
+const tasksSchema = new Schema({
+  title: { type: String, require: true },
+  status: { type: String, require: true },
+  createAt: { type: Date, default: Date.now },
 });
 
-connection.connect((error) => {
-  if (error) throw error;
-  console.log(`Conectado ao BD: ${process.env.MYSQL_DATABASE}`);
-});
-
-module.exports = connection;
+module.exports = mongoose.model('tasks', tasksSchema);

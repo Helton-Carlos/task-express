@@ -1,15 +1,12 @@
-const tasksModel = require('../models/tasks.models');
-
-const getAll = async (_req, res) => {
-  const tasks = await tasksModel.getAll();
-  return res.status(200).json(tasks);
-};
+const tasksSchema = require('../models/connection.models');
 
 const createTask = async (req, res) => {
-  return res.status(200).json(req.body);
+  const tasks = req.body;
+  const newTasks = await tasksSchema.create(tasks);
+
+  return res.status(200).json(newTasks);
 };
 
 module.exports = {
-  getAll,
   createTask,
 };
